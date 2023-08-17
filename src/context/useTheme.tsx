@@ -19,10 +19,10 @@ export function useTheme(): themeValue {
 }
 
 export function ThemeProvider({ children }: PropsWithChildren) {
-    const [isDark, setDark] = useState<boolean>(false);
+    const [isDark, setDark] = useState<boolean>(true);
 
     const toggleTheme = useCallback(() => {
-        setDark(value =>!value);
+        setDark((value) => !value);
     }, [isDark]);
 
     const value = useMemo((): themeValue => {

@@ -1,49 +1,45 @@
-import { useState } from "react";
-import { Listbox } from "@headlessui/react";
-import clsx from "clsx";
 import { cn } from "../utils/cn";
 import { useTheme } from "../context/useTheme";
-import { ArrowBigDownIcon, ChevronDown, ChevronUp } from "lucide-react";
 import { Dropdown } from "../context/FilterContext";
+import { Region } from "../hooks/useFilter";
 
+export default function FilterBar({
+    regions,
+    handleClick,
+}: {
+    regions: Region[];
+    handleClick: (region: Region) => void;
+}) {
+    const { isDark } = useTheme();
 
-const people = [
-    { id: 1, name: "Afrique" },
-    { id: 2, name: "Amerique" },
-    { id: 3, name: "Asie" },
-    { id: 4, name: "Europe" },
-    { id: 5, name: "Oceanie" },
-];
-
-export default function FilterBar() {
-    const {isDark} = useTheme()
-    const [selectedPerson, setSelectedPerson] = useState(people[0]);
     return (
-        <Dropdown>
-            <Dropdown.Button>Filtre par pay...</Dropdown.Button>
-            <Dropdown.List>
-                <Dropdown.Item>lol</Dropdown.Item>
+        <Dropdown onChange={handleClick} className="relative">
+            <Dropdown.Button
+                className={cn(
+                    "flex justify-between w-[60%] rounded py-3 px-4 shadow-m items-center",
+                    "bg-white ",
+                    isDark && "bg-dark-bg text-light-gray"
+                )}>
+                Filtrer par region
+            </Dropdown.Button>
+            <Dropdown.List
+                className={cn(
+                    "list-none absolute w-[60%] bg-white mt-2 shadow-md rounded  py-3",
+                    isDark && "text-light-gray bg-dark-bg"
+                )}>
+                {regions.map((value) => (
+                    <Dropdown.Item
+                        itemValue={value}
+                        key={value.name}
+                        className={cn(
+                            "bg-white pt-1 px-3 cursor-pointer hover:bg-dark-blue-light",
+                            isDark && "text-light-gray bg-dark-bg",
+                            value.selected && "bg-red-500"
+                        )}>
+                        {value.name}
+                    </Dropdown.Item>
+                ))}
             </Dropdown.List>
         </Dropdown>
-
-
-
-
-        // <div className={cn("bg-white w-[60%] py-0 overflow-hidden rounded text-dark-blue-light shadow-md" ,isDark && "text-light-gray")}>
-        //     <Listbox value={selectedPerson} onChange={setSelectedPerson}>
-        //     <Listbox.Button className={cn('bg-white w-[100%] h-[100%] p-3 ', isDark && "bg-dark-blue")}>{selectedPerson.name}</Listbox.Button>
-        //     <Listbox.Options>
-        //         {people.map((person) => (
-        //             <Listbox.Option 
-        //                 className={cn("w-max ")}
-        //                 key={person.id}
-        //                 value={person}
-        //                 >
-        //                 {person.name}
-        //             </Listbox.Option>
-        //         ))}
-        //     </Listbox.Options>
-        // </Listbox>
-        // </div>
     );
 }

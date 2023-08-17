@@ -1,8 +1,8 @@
-import { Search } from "lucide-react";
+import Search from "../icons/Search";
 import { useTheme } from "../context/useTheme";
 import { cn } from "../utils/cn";
 
-const SearchBar = () => {
+const SearchBar = ({setSearch}:{setSearch:React.Dispatch<React.SetStateAction<string>>}) => {
     const { isDark } = useTheme();
 
     return (
@@ -13,8 +13,9 @@ const SearchBar = () => {
                 "text-sm",
                 isDark && "text-light-gray bg-dark-bg"
             )}>
-            <Search color={cn(isDark && "#fff", !isDark && "#858585")} />
+            <Search className={cn(" h-5 w-5 text-dark-blue-light",isDark && "text-white")} />
             <input
+                onChange={(e) => setSearch(e.target.value)}
                 className={cn("outline-none focus",isDark && "bg-dark-bg text-light-gray")}
                 type="text"
                 placeholder="Rechercher un pays ..."
