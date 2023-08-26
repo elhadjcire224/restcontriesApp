@@ -12,7 +12,7 @@ const Header = () => {
 
                 "px-3 py-8",
                 "text-dark-blue text-md",
-                isDark && "bg-dark-bg"
+                isDark && "bg-dark-blue"
             )}>
             <h1 className={cn("font-bold", isDark && "text-white")}>
                 <strong>Where in the world?</strong>

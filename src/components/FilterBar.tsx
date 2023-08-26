@@ -18,14 +18,14 @@ export default function FilterBar({
                 className={cn(
                     "flex justify-between w-[60%] rounded py-3 px-4 shadow-m items-center",
                     "bg-white ",
-                    isDark && "bg-dark-bg text-light-gray"
+                    isDark && "bg-dark-blue text-light-gray"
                 )}>
                 Filtrer par region
             </Dropdown.Button>
             <Dropdown.List
                 className={cn(
                     "list-none absolute w-[60%] bg-white mt-2 shadow-md rounded  py-3",
-                    isDark && "text-light-gray bg-dark-bg"
+                    isDark && "text-light-gray bg-dark-blue"
                 )}>
                 {regions.map((value) => (
                     <Dropdown.Item
@@ -33,7 +33,7 @@ export default function FilterBar({
                         key={value.name}
                         className={cn(
                             "bg-white pt-1 px-3 cursor-pointer hover:bg-dark-blue-light",
-                            isDark && "text-light-gray bg-dark-bg",
+                            isDark && "text-light-gray bg-dark-blue",
                             value.selected && "bg-red-500"
                         )}>
                         {value.name}
