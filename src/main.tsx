@@ -4,6 +4,8 @@ import App from "./App";
 import "./index.css";
 import { ThemeProvider } from "./context/useTheme";
 import { CountryProvider } from "./context/CountryContent";
+import { inject } from '@vercel/analytics';
+inject();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
