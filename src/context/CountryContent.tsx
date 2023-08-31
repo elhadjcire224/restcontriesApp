@@ -2,6 +2,7 @@ import {
     PropsWithChildren,
     createContext,
     useContext,
+    useEffect,
     useLayoutEffect,
     useState,
 } from "react";
@@ -254,7 +255,7 @@ let Context = createContext([] as any);
 
 export const CountryProvider = ({ children }: PropsWithChildren) => {
     const [countries, setCountries] = useState<Country[] | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const value: PropsType = {
         countries,
@@ -264,8 +265,7 @@ export const CountryProvider = ({ children }: PropsWithChildren) => {
     };
     // Dans src/context/CountryContent.tsx
 
-    useLayoutEffect(() => {
-        setIsLoading(true);
+    useEffect(() => {
 
         const cachedCountries = localStorage.getItem("countries");
         if (cachedCountries) {
@@ -277,12 +277,13 @@ export const CountryProvider = ({ children }: PropsWithChildren) => {
                 .then((data) => {
                     setCountries(data);
                     localStorage.setItem("countries", JSON.stringify(data));
-                    setIsLoading(false);
+                    // setIsLoading(false);
                 })
                 .catch((error) => {
                     console.error("Error fetching countries:", error);
-                    setIsLoading(false);
+                    // setIsLoading(false);
                 });
+                setIsLoading(false)
         }
     }, []);
 

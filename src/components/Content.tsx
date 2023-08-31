@@ -8,11 +8,13 @@ import { useFilter } from "../hooks/useFilter";
 import CountriesList from "./ContriesList";
 import { Country, useCountries } from "../context/CountryContent";
 import CountryDetails from "./CountryDetails";
+import Squelton from "./Squelton";
+import Squeletons from "./Squeletons";
 
 const Content = () => {
     const { isDark } = useTheme();
     const { regions, handleClick } = useFilter();
-    const { countries} = useCountries();
+    const { countries,isLoading} = useCountries();
     const [search, setSearch] = useState("");
     const [filteredCountries, setFilteredCountries] = useState(countries);
     const [selectedCountry, setSelectedCountry] = useState<Country|null>(null);
@@ -58,6 +60,8 @@ const Content = () => {
         handleSearch(search);
     }, [search]);
 
+    
+
     return (
         <main
             className={cn('content',
@@ -71,17 +75,19 @@ const Content = () => {
                 </section>
             ) : null}
 
-            {selectedCountry == null ? (
-                filteredCountries?.length !== 0 ? (
-                    <CountriesList
-                        setSelectedCountry={setSelectedCountry}
-                        countries={filteredCountries}
-                    />
-                ) : (
-                    "rien ne correspond a vos recherches"
+            {!isLoading ? (
+                selectedCountry == null ? (
+                    filteredCountries?.length !== 0 ? (
+                        <CountriesList
+                            setSelectedCountry={setSelectedCountry}
+                            countries={filteredCountries}
+                        />
+                    ) : (
+                        <div className="bg-red-500 text-white p-8 rounded-lg  border border-red-800">desolé rien ne correspond a vous recherche</div>
+                    )
+                ) : (<CountryDetails country={selectedCountry} setSelectedCountry={setSelectedCountry}/>
                 )
-            ) : (<CountryDetails country={selectedCountry} setSelectedCountry={setSelectedCountry}/>
-            )}
+            ) : <Squeletons/>}
         </main>
     );
 };

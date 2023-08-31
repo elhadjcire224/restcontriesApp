@@ -11,7 +11,7 @@ const CountryItem = ({country,setSelectedCountry}:{country:Country,setSelectedCo
                 isDark && "bg-dark-blue my-3 "
             )}>
             <div className=" h-[150px] sm:h-[200px]">
-                <img className="rounded  h-full w-full" src={country.flags.png} loading="lazy" />
+                <img className="rounded  h-full w-full" alt={country.name.official} src={country.flags.png} loading="lazy" />
             </div>
             <div className="px-5">
                 <h3
