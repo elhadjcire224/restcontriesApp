@@ -2,7 +2,6 @@ import {
     PropsWithChildren,
     createContext,
     useContext,
-    useEffect,
     useLayoutEffect,
     useState,
 } from "react";
@@ -273,6 +272,7 @@ export const CountryProvider = ({ children }: PropsWithChildren) => {
             setCountries(JSON.parse(cachedCountries));
             setIsLoading(false);
         } else {
+            // fetch("https://restcountries.com/v3.1/all")
             fetch("http://localhost:3000/countries")
                 .then((response) => response.json())
                 .then((data) => {

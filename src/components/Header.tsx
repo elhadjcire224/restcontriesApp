@@ -13,8 +13,9 @@ const Header = () => {
                 "px-3 py-8",
                 "text-dark-blue text-md",
                 isDark && "bg-dark-blue"
+                
             )}>
-            <h1 className={cn("font-bold", isDark && "text-white")}>
+            <h1 className={cn("font-bold", isDark && "text-white",'sm:text-lg')}>
                 <strong>Where in the world?</strong>
             </h1>
             <ThemeSwitcher />

@@ -1,17 +1,17 @@
 import { Country } from "../context/CountryContent";
 import { useTheme } from "../context/useTheme";
 import { cn } from "../utils/cn";
-
-const CountryItem = ({ data }: { data: Country }) => {
+const CountryItem = ({country,setSelectedCountry}:{country:Country,setSelectedCountry: React.Dispatch<React.SetStateAction<Country |null>>}) => {
     const { isDark } = useTheme();
     return (
         <article
+            onClick={() => setSelectedCountry(country)}
             className={cn(
                 "rounded bg-white shadow-md cursor-pointer h-full w-full",
                 isDark && "bg-dark-blue my-3 "
             )}>
-            <div className=" h-[150px]">
-                <img className="rounded object-cover h-full w-full" src={data.flags.png} loading="lazy" />
+            <div className=" h-[150px] sm:h-[200px]">
+                <img className="rounded  h-full w-full" src={country.flags.png} loading="lazy" />
             </div>
             <div className="px-5">
                 <h3
@@ -19,7 +19,7 @@ const CountryItem = ({ data }: { data: Country }) => {
                         "font-bold text-lg my-4 text-dark-blue-light",
                         isDark && "text-white"
                     )}>
-                    {data.translations.fra.official}
+                    {country.translations.fra.official}
                 </h3>
                 <p
                     className={cn(
@@ -33,7 +33,7 @@ const CountryItem = ({ data }: { data: Country }) => {
                         )}>
                         Population:
                     </span>
-                    {data.population}
+                    {country.population}
                 </p>
                 <p
                     className={cn(
@@ -47,7 +47,7 @@ const CountryItem = ({ data }: { data: Country }) => {
                         )}>
                         Region:
                     </span>
-                    {data.region}
+                    {country.region}
                 </p>
                 <p
                     className={cn(
@@ -61,7 +61,7 @@ const CountryItem = ({ data }: { data: Country }) => {
                         )}>
                         Capital:
                     </span>
-                    {data.capital}
+                    {country.capital}
                 </p>
             </div>
         </article>

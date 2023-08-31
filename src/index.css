@@ -1,3 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.content span{
+    margin-left: .5em !important;
+}

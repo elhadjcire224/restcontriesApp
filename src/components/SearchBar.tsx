@@ -16,7 +16,8 @@ const SearchBar = ({ setSearch }: { setSearch: (query: string) => void }) => {
                 "flex items-center gap-5  py-3 px-5 rounded shadow-sm ",
                 "text-dark-bg bg-white ",
                 "text-sm",
-                isDark && "text-light-gray bg-dark-blue"
+                isDark && "text-light-gray bg-dark-blue",
+                "sm:w-[40%]"
             )}
         >
             <Search
@@ -24,7 +25,7 @@ const SearchBar = ({ setSearch }: { setSearch: (query: string) => void }) => {
             />
             <input
                 onChange={handleSearchChange}
-                className={cn("outline-none focus", isDark && "bg-dark-blue text-light-gray")}
+                className={cn("outline-none focus w-full", isDark && "bg-dark-blue text-light-gray")}
                 type="text"
                 placeholder="Rechercher un pays ..."
             />
