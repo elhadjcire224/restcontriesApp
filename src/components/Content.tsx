@@ -83,7 +83,7 @@ const Content = () => {
                             countries={filteredCountries}
                         />
                     ) : (
-                        <div className="bg-red-500 text-white p-8 rounded-lg  border border-red-800">desolé rien ne correspond a vous recherche</div>
+                        <div className="bg-red-500 text-white p-8 rounded-lg  border border-red-800">desolé rien ne correspond à vos recherches</div>
                     )
                 ) : (<CountryDetails country={selectedCountry} setSelectedCountry={setSelectedCountry}/>
                 )

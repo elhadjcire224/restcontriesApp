@@ -12,7 +12,7 @@ const CountryDetails = ({
     country: Country;
     setSelectedCountry: React.Dispatch<React.SetStateAction<Country | null>>;
 }) => {
-    const currencyNames = Object.values(country.currencies).map(
+    const currencyNames = country.currencies && Object.values(country.currencies).map(
         (currency) => currency.name
     );
 
@@ -142,7 +142,7 @@ const CountryDetails = ({
                                         "text-dark-bg font-thin",
                                         isDark && "text-white"
                                     )}>
-                                    {currencyNames.join(", ")}
+                                    {currencyNames && currencyNames.join(", ")}
                                 </span>
                             </p>
                             <p
@@ -156,7 +156,7 @@ const CountryDetails = ({
                                         "text-dark-bg font-thin",
                                         isDark && "text-white"
                                     )}>
-                                    {Object.values(country.languages)
+                                    {country.languages && Object.values(country.languages)
                                         .map((language) => language)
                                         .join(", ")}
                                 </span>
