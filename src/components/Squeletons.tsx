@@ -16,11 +16,11 @@ const Squeletons = () => {
                 " w-full",
                 "bg-light-gray px-3 min-h-screen",
                 isDark && "bg-dark-bg",
-                "grid grid-cols-[250px]  justify-center  gap-5 p-10",
+                "grid grid-cols-[repeat(auto-fit,minmax(250px,300px))] justify-center  gap-5 p-6",
                 
                 
                 isDark && "text-white bg-dark-bg",
-                'sm:grid-cols-4 gap-16',
+                'sm:gap-16',
             )}>
                 {squeltons}
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export type Region = {
     name: string;
@@ -8,11 +8,13 @@ export type Region = {
 export const useFilter = () => {
     const [regions, setRegions] = useState<Region[]>([
         { name: "Africa", selected: false },
-        { name: "America", selected: false },
+        { name: "Americas", selected: false },
         { name: "Asia", selected: false },
         { name: "Europe", selected: false },
         { name: "Oceania", selected: false },
     ]);
+
+    const regionNames = useMemo(() => regions.filter(r => r.selected).map(r => r.name),[regions])
 
     const handleClick = (region: Region) => {
         const updatedRegions = regions.map((r) =>
@@ -21,5 +23,5 @@ export const useFilter = () => {
         setRegions(updatedRegions);
     };
 
-    return { regions, handleClick };
+    return { regions, handleClick,regionNames };
 };

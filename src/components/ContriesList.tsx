@@ -10,11 +10,11 @@ const CountriesList = ({countries,setSelectedCountry}:{countries:Country[]|null,
     return (
         <section
             className={cn(
-                "flex flex-wrap  gap-5 p-6 ",
+                "grid grid-cols-[repeat(auto-fit,minmax(250px,300px))] justify-center  gap-5 p-6 ",
                 "text-white mx-5 ",
                 "text-sm",
                 isDark && "text-white bg-dark-bg",
-                'sm:grid-cols-4 sm:gap-16 sm:text-md',
+                ' sm:gap-12 sm:text-md',
             
 
             )}>

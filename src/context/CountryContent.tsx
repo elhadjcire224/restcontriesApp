@@ -3,7 +3,6 @@ import {
     createContext,
     useContext,
     useEffect,
-    useLayoutEffect,
     useState,
 } from "react";
 const country = {
@@ -257,40 +256,31 @@ export const CountryProvider = ({ children }: PropsWithChildren) => {
     const [countries, setCountries] = useState<Country[] | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    const value: PropsType = {
-        countries,
-        setCountries,
-        isLoading,
-        setIsLoading,
-    };
-    // Dans src/context/CountryContent.tsx
-
     useEffect(() => {
-
         const cachedCountries = localStorage.getItem("countries");
         if (cachedCountries) {
             setCountries(JSON.parse(cachedCountries));
             setIsLoading(false);
         } else {
             // fetch("https://restcountries.com/v3.1/all")
-            fetch("http//localhost:3000/countries")
+            fetch("http://localhost:3000/countries")
                 .then((response) => response.json())
                 .then((data) => {
                     setCountries(data);
                     localStorage.setItem("countries", JSON.stringify(data));
-                    // setIsLoading(false);
                 })
                 .catch((error) => {
-                    console.error("Error fetching countries:", error);
-                    // setIsLoading(false);
+                    throw new Error('Error fetching countries')
                 });
-                setIsLoading(false)
+            setIsLoading(false);
         }
     }, []);
 
-    
-
-    return <Context.Provider value={{countries,isLoading}}>{children}</Context.Provider>;
+    return (
+        <Context.Provider value={{ countries, isLoading }}>
+            {children}
+        </Context.Provider>
+    );
 };
 
 export const useCountries = () => {

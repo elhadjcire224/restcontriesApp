@@ -1,21 +1,26 @@
 //content.tsx
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useTheme } from "../context/useTheme";
 import { cn } from "../utils/cn";
 import FilterBar from "./FilterBar";
 import SearchBar from "./SearchBar";
-import { useFilter } from "../hooks/useFilter";
+import {  useFilter } from "../hooks/useFilter";
 import CountriesList from "./ContriesList";
 import { Country, useCountries } from "../context/CountryContent";
 import CountryDetails from "./CountryDetails";
-import Squelton from "./Squelton";
 import Squeletons from "./Squeletons";
+
+function filter(countries:Country[],regionNames:string[]){
+    
+    return countries?.filter(country => regionNames.includes(country.region));
+}
 
 const Content = () => {
     const { isDark } = useTheme();
-    const { regions, handleClick } = useFilter();
+    const { regions, handleClick,regionNames } = useFilter();
     const { countries,isLoading} = useCountries();
     const [search, setSearch] = useState("");
+    
     const [filteredCountries, setFilteredCountries] = useState(countries);
     const [selectedCountry, setSelectedCountry] = useState<Country|null>(null);
 
@@ -24,15 +29,10 @@ const Content = () => {
     }, [countries]);
 
     const handleFilter = () => {
-        if (regions.length === 0) {
+        if (regionNames.length == 0) {
             setFilteredCountries(countries);
         } else {
-            let filteredCountriesN = filteredCountries?.filter(
-                (country: Country) => regions.filter((r) => r.selected)[0].name == country.region
-                // regions.includes(country.region)
-                );
-                setFilteredCountries(filteredCountriesN)
-
+            setFilteredCountries(filter(countries,regionNames))
         }
     };
 
@@ -41,7 +41,8 @@ const Content = () => {
     }, [regions]);
 
     const handleSearch = (query: string) => {
-        const result = countries?.filter((country: Country) => {
+        const searchableCountries = regionNames.length == 0 ? countries : filter(countries,regionNames);
+        const result = searchableCountries?.filter((country: Country) => {
             const capital = country.capital ? country.capital[0] : "";
             return (
                 country.translations.fra.common
@@ -70,7 +71,7 @@ const Content = () => {
             )}>
             {selectedCountry == null ? (
                 <section className={cn("py-5 flex flex-col gap-5","sm:flex-row justify-between mx-4")}>
-                    <SearchBar setSearch={setSearch} />
+                    <SearchBar search={search} setSearch={setSearch} />
                     <FilterBar regions={regions} handleClick={handleClick} />
                 </section>
             ) : null}

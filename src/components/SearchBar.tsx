@@ -3,7 +3,7 @@ import Search from "../icons/Search";
 import { useTheme } from "../context/useTheme";
 import { cn } from "../utils/cn";
 
-const SearchBar = ({ setSearch }: { setSearch: (query: string) => void }) => {
+const SearchBar = ({ setSearch,search }: { setSearch: (query: string) => void , search:string}) => {
     const { isDark } = useTheme();
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +27,7 @@ const SearchBar = ({ setSearch }: { setSearch: (query: string) => void }) => {
                 onChange={handleSearchChange}
                 className={cn("outline-none focus w-full", isDark && "bg-dark-blue text-light-gray")}
                 type="text"
+                value={search}
                 placeholder="Rechercher un pays ..."
             />
         </div>

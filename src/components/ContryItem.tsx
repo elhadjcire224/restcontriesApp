@@ -7,7 +7,7 @@ const CountryItem = ({country,setSelectedCountry}:{country:Country,setSelectedCo
         <article
             onClick={() => setSelectedCountry(country)}
             className={cn(
-                " basis-[270px] overflow-hidden grow rounded bg-white shadow-md cursor-pointer h-full w-full",
+                " overflow-hidden rounded bg-white shadow-md cursor-pointer h-full w-full",
                 isDark && "bg-dark-blue my-1 "
             )}>
             <div className=" h-[150px] sm:h-[200px]">

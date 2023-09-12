@@ -17,8 +17,8 @@ const BordersList = ({
         <div className="flex flex-col gap-4 ">
             <h2 className="text-xl capitalize ">Pays limitrophes : </h2>
             <div className="flex gap-4 flex-wrap  capitalize">
-                {bordersInfos?.map((border) => (
-                    <Button className="" country={border} setSelectedCountry={setSelectedCountry}>{border.translations.fra.common}</Button>
+                {bordersInfos?.map((border,index) => (
+                    <Button key={index} className="" country={border} setSelectedCountry={setSelectedCountry}>{border.translations.fra.common}</Button>
                 ))}
             </div>
         </div>
