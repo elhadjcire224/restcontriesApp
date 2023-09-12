@@ -6,8 +6,9 @@ import { VitePWA } from "vite-plugin-pwa";
 export default defineConfig({
     plugins: [react(), VitePWA({
       manifest:{
-        name:"where-in-the-world",
-        short_name:"WIW",
+        name:"PAYS DU MONDE",
+        short_name:"PAYS",
+        background_color:"#202c37",
         icons:[
           {
             "src": "./icons/manifest-icon-192.maskable.png",
